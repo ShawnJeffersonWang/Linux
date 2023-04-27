@@ -14,7 +14,7 @@ class SPSCQueue {
     }
     bool Push(std::unique_ptr<T> item) {
         std::unique_lock<std::mutex> lock(mutex_);
-        not_full_.wait([this]() { return size_ < capacity_; });
+        not_full_.wait(lock, [this]() { return size_ < capacity_; });
         data_[rear_] = std::move(*item);
         rear_ = (rear_ + 1) % capacity_;
         size_++;
@@ -23,14 +23,14 @@ class SPSCQueue {
     }
     std::unique_ptr<T> pop() {
         std::unique_lock<std::mutex> lock(mutex_);
-        not_empty_.wait([this]() { return size_ > 0; });
+        not_empty_.wait(lock, [this]() { return size_ > 0; });
         std::unique_ptr<T> item(new T(std::move(data[front_])));
         front_ = (front_ + 1) % capacity_;
         size_--;
         not_full_.notify_one();
         return item;
     }
-    virtual ~SPSCQueue() = 0;
+    virtual ~SPSCQueue() {}
 
    private:
     std::unique_ptr<T[]> data_;
@@ -55,7 +55,7 @@ class MPMCQueue {
           count_(0) {}
     bool Push(std::unique_ptr<T> item) {
         std::unique_lock<std::mutex> lock(mutex_);
-        not_full_.wait([this] { count_ < capacity_; });
+        not_full_.wait(lock, [this] { return count_ < capacity_; });
         buffer_[write_index_] = std::move(item);
         write_index_ = (write_index_ + 1) % capacity_;
         count_++;
@@ -64,14 +64,14 @@ class MPMCQueue {
     }
     std::unique_ptr<T> pop() {
         std::unique_lock<std::mutex> lock(mutex_);
-        not_empty_.wait([this]() { count_ > 0 });
+        not_empty_.wait(lock, [this]() { return count_ > 0; });
         std::unique_ptr<T> item = std::move(buffer_[read_index_]);
         read_index_ = (read_index_ + 1) % capacity_;
         count_--;
-        not_full_.notify_one;
+        not_full_.notify_one();
         return item;
     }
-    virtual ~MPMCQueue() = 0;
+    virtual ~MPMCQueue() {}
 
    private:
     const int capacity_;
