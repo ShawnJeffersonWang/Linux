@@ -1,4 +1,6 @@
-namespace YOUR_NAME {
+#include <gtest/gtest.h>
+#include <iostream>
+namespace Shawn {
 template <class T>
 // list存储的节点
 // 可以根据你的需要添加适当的成员函数与成员变量
@@ -9,7 +11,7 @@ struct node {
     // 构造函数
     node(const T& data) : data_(data), prev_(nullptr), next_(nullptr) {}
     node() : prev_(nullptr), next_(nullptr) {}
-    // 稀构函数
+    // 析构函数
     ~node() {}
 };
 
@@ -181,4 +183,4 @@ class list {
         std::swap(size_, lt.size_);
     }
 };
-};  // namespace YOUR_NAME
+};  // namespace Shawn

@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/client.out.dir/NetworkTest.grpc.pb.cc.o -c /home/shawn/Code/Network/Network/NetworkTest.grpc.pb.cc",
+  "file": "/home/shawn/Code/Network/Network/NetworkTest.grpc.pb.cc",
+  "output": "CMakeFiles/client.out.dir/NetworkTest.grpc.pb.cc.o"
+},
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/client.out.dir/NetworkTest.pb.cc.o -c /home/shawn/Code/Network/Network/NetworkTest.pb.cc",
+  "file": "/home/shawn/Code/Network/Network/NetworkTest.pb.cc",
+  "output": "CMakeFiles/client.out.dir/NetworkTest.pb.cc.o"
+},
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/client.out.dir/test_client.cpp.o -c /home/shawn/Code/Network/Network/test_client.cpp",
+  "file": "/home/shawn/Code/Network/Network/test_client.cpp",
+  "output": "CMakeFiles/client.out.dir/test_client.cpp.o"
+},
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/server.out.dir/NetworkTest.grpc.pb.cc.o -c /home/shawn/Code/Network/Network/NetworkTest.grpc.pb.cc",
+  "file": "/home/shawn/Code/Network/Network/NetworkTest.grpc.pb.cc",
+  "output": "CMakeFiles/server.out.dir/NetworkTest.grpc.pb.cc.o"
+},
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/server.out.dir/NetworkTest.pb.cc.o -c /home/shawn/Code/Network/Network/NetworkTest.pb.cc",
+  "file": "/home/shawn/Code/Network/Network/NetworkTest.pb.cc",
+  "output": "CMakeFiles/server.out.dir/NetworkTest.pb.cc.o"
+},
+{
+  "directory": "/home/shawn/Code/Network/Network/build",
+  "command": "/usr/bin/g++  -I/home/shawn/Code/Network/Network  -O2 -g  -std=gnu++17 -pthread -o CMakeFiles/server.out.dir/test_server.cpp.o -c /home/shawn/Code/Network/Network/test_server.cpp",
+  "file": "/home/shawn/Code/Network/Network/test_server.cpp",
+  "output": "CMakeFiles/server.out.dir/test_server.cpp.o"
+}
+]

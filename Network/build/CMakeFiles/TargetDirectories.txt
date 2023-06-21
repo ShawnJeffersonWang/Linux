@@ -1,0 +1,4 @@
+/home/shawn/Code/Network/Network/build/CMakeFiles/client.out.dir
+/home/shawn/Code/Network/Network/build/CMakeFiles/server.out.dir
+/home/shawn/Code/Network/Network/build/CMakeFiles/edit_cache.dir
+/home/shawn/Code/Network/Network/build/CMakeFiles/rebuild_cache.dir
