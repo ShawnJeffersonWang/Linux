@@ -168,36 +168,38 @@ ssize_t Readn(int fd, char* buf, size_t n) {
     char* ptr = buf;
 
     while (nleft > 0) {
-        if ((nread = read(fd, ptr, nleft) < 0)) {
+        if ((nread = recv(fd, ptr, nleft, 0) < 0)) {
             if (errno == EINTR)
                 continue;
             else
                 return -1;
         } else if (nread == 0) {
             std::cout << "-----------离谱-----------" << std::endl;
-            break;
+            return n - nleft;
         }
         nleft -= nread;
         ptr += nread;
     }
-    return n - nleft;
+    return n;
 }
 
 int recvMsg(int fd, char** msg) {
-    int len, ret;
+    int len = 0;
     Readn(fd, (char*)&len, 4);
     len = ntohl(len);
     std::cout << "服务器接收数据大小：" << len << std::endl;
+
     char* buf = (char*)malloc(sizeof(char) * (len + 1));
-    ret = Readn(fd, buf, len);
-    if (ret == 0) {
-        std::cout << "客户端断开连接" << std::endl;
+    int ret = Readn(fd, buf, len);
+    if (ret != len) {
         close(fd);
-    } else if (ret != len) {
+        free(buf);
         std::cout << "数据接收失败" << std::endl;
+        return -1;
     }
     buf[len] = '\0';
     *msg = buf;
+
     return ret;
 }
 

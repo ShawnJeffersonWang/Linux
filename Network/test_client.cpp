@@ -253,16 +253,16 @@ void sys_err(const char* str) {
 }
 
 ssize_t Writen(int fd, const char* buf, size_t n) {
-    size_t nleft = n;
     ssize_t nwritten;
+    size_t nleft = n;
     const char* ptr = buf;
 
     while (nleft > 0) {
-        if ((nwritten = write(fd, ptr, nleft) <= 0)) {
-            if (nwritten < 0 && errno == EINTR)
-                continue;
-            else
-                return -1;
+        if ((nwritten = send(fd, ptr, nleft, 0)) < 0) {
+            close(fd);
+            return -1;
+        } else if (nwritten == 0) {
+            continue;
         }
         nleft -= nwritten;
         ptr += nwritten;
@@ -275,12 +275,12 @@ int sendMsg(int fd, const char* msg, int len) {
         std::cout << "========逆天=========" << std::endl;
         return -1;
     }
-
     char* buf = (char*)malloc(sizeof(char) * (len + 4));
     int nlen = htonl(len);
     memcpy(buf, &nlen, 4);
-    memcpy(buf, msg, len);
+    memcpy(buf + 4, msg, len);
     int ret = Writen(fd, buf, sizeof(buf));
+    free(buf);
     if (ret == -1) {
         perror("sendMsg error");
         close(fd);
